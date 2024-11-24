@@ -1,9 +1,10 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+
+# Setting the path to the dataset (update with correct path to dataset)
+dataset_path = "/Users/simonpedersen/Downloads/Boligpriser - Uncleaned.csv"
 
 # Reading in dataset
-data = pd.read_csv('Boligpriser.csv')
+data = pd.read_csv(dataset_path)
 
 # Dataset description
 num_attributes = data.shape[1]
@@ -14,12 +15,12 @@ print(data.dtypes)
 print("\n")
 
 # Sorting the dataset based on sales date to establish time-range
-time_range = data.sort_values(by='Sales date')
+time_range = data.sort_values(by='Salgsdato')
 print("Sorted data by 'Sales date'")
 print(time_range.head)
 
 print("\ntime range of sales:")
-print(f"From: {time_range['Sales date'].iloc[0]} To: {time_range['Sales date'].iloc[-1]}")
+print(f"From: {time_range['Salgsdato'].iloc[0]} To: {time_range['Salgsdato'].iloc[-1]}")
 
 # Overview of columns with null values and their counts
 print("\nMissing values per attribute:")
@@ -37,6 +38,7 @@ for col in data.columns:
         print("Sample Values:", data[col].value_counts().head())
     else:  # Numerical attribute
         print("Statistics:")
-        print(data[col].describe())
+        print(data[col].describe().apply(lambda x: format(x, 'f')))
     
     print("\n" + "-"*30 + "\n")
+
