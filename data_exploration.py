@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Setting the path to the dataset (update with correct path to dataset)
 dataset_path = "/Users/simonpedersen/Downloads/Boligpriser - Uncleaned.csv"
@@ -42,3 +44,39 @@ for col in data.columns:
     
     print("\n" + "-"*30 + "\n")
 
+# Visual representations of the target variable
+
+# 1. Distribution of Sale Prices
+plt.figure(figsize=(10, 6))
+sns.histplot(data['Salgspris'], bins=50, kde=True, color='blue')
+plt.title('Distribution of Sale Prices', fontsize=16)
+plt.xlabel('Sale Price (M DKK)', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+plt.grid(axis='y')
+plt.tight_layout()
+plt.savefig('sale_price_distribution.png')
+plt.show()
+
+# Sale Prices by Region
+region_prices = data.groupby('Region')['Salgspris'].median().sort_values(ascending=False)
+
+plt.figure(figsize=(10, 6))
+region_prices.plot(kind='bar', color='orange')
+plt.title('Median Sale Price by Region', fontsize=16)
+plt.xlabel('Region', fontsize=12)
+plt.ylabel('Median Sale Price (M DKK)', fontsize=12)
+plt.tight_layout()
+plt.savefig('median_sale_price_by_region.png')
+plt.show()
+
+# Sale Prices by Property Type
+property_prices = data.groupby('Boligtype')['Salgspris'].median().sort_values(ascending=False)
+
+plt.figure(figsize=(10, 6))
+property_prices.plot(kind='bar', color='green')
+plt.title('Median Sale Price by Residence Type', fontsize=16)
+plt.xlabel('Property Type', fontsize=12)
+plt.ylabel('Median Sale Price (M DKK)', fontsize=12)
+plt.tight_layout()
+plt.savefig('median_sale_price_by_property_type.png')
+plt.show()
