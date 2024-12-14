@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Setting the path to the dataset (update with correct path to dataset)
-dataset_path = "/Users/simonpedersen/Downloads/Boligpriser - Uncleaned.csv"
+dataset_path = "add path to dataset here"
 
 # Reading in dataset
 data = pd.read_csv(dataset_path)
